@@ -3,7 +3,8 @@ class LibrariesController < ApplicationController
 
   # GET /libraries or /libraries.json
   def index
-    @libraries = Library.all
+    @q = Library.ransack(params[:q])
+    @libraries = @q.result(distinct: true)
   end
 
   # GET /libraries/1 or /libraries/1.json
